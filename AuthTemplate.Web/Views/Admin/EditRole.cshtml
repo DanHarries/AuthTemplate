@@ -5,78 +5,59 @@
 
 <h1>Edit Role</h1>
 <!-- card start -->
-<article class="article-wrapper pb-0 mb-0">
-    <div class="article-content">
-        <div class="article-inner">
-            <div>
-                <div class="columns column-1">&nbsp;</div>
-                <div class="columns column-4">
-                    <form asp-action="EditRole" asp-controller="Admin" class="mt-3" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="frm-row">
-                            <input asp-for="Id" class="frm-input" disabled />
-                        </div>
+<div class="col-3">&nbsp;</div>
+<div class="col-6">
+    <form asp-action="EditRole" asp-controller="Admin" class="mt-3" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="frm-row">
-                            <input asp-for="RoleName" class="frm-input" placeholder="Password">
-                            <span class="text-danger" asp-validation-for="RoleName"></span>
-                        </div>
+        <div class="row">
+            <input asp-for="Id" class="form-control" disabled />
+        </div>
 
-                        <div class="frm-row text-center">
-                            <button class="frm-button material-button medium" type="submit">Update</button>
-                            <a asp-action="RoleManager" asp-controller="Admin" class="frm-button material-button medium">Cancel</a>
-                        </div>
-                    </form>
+        <div class="row">
+            <input asp-for="RoleName" class="form-control" placeholder="Password">
+            <span class="text-danger" asp-validation-for="RoleName"></span>
+        </div>
 
-                </div>
-                <div class="columns column-1">&nbsp;</div>
-            </div>
+        <div class="row text-center">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+            <a asp-action="RoleManager" asp-controller="Admin" class="btn btn-outline-danger">Cancel</a>
+        </div>
+    </form>
+
+</div>
+<div class="col-3">&nbsp;</div>
 
 
-            <div>
-                <div class="columns column-2">&nbsp;</div>
 
-                <!-- item start -->
-                <div class="author-item">
-                    <div class="author-image">
-                    </div>
-                    <div class="author-info text-center pr-0">
-                        <h3><span>Users in this role</span></h3>
-                        <hr />
-                        <div class="author-description">
-                            @if (Model.Users.Any())
-                            {
-                                foreach (var user in Model.Users)
-                                {
-                                    <h5>@user</h5>
-                                }
-                            }
-                            else
-                            {
-                                <h5>None at the moment</h5>
-                            }
-                            <br />
-                        </div>
-                        <div class="author-extras">
-                            <a asp-action="EditUsersInRole" asp-controller="Admin" asp-route-roleId="@Model.Id" class="frm-button material-button medium">Add or Remove Users</a>
+<div>
+    <div class="col-2">&nbsp;</div>
 
-                        </div>
 
-                    </div>
-                    <div class="author-image">
-                    </div>
-                </div>
-                <!-- item end -->
-            </div>
-            <div class="columns column-2">&nbsp;</div>
+    <div class="text-center pr-0">
+        <h3><span>Users in this role</span></h3>
+        <hr />
+        <div class="author-description">
+            @if (Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <h5>@user</h5>
+                }
+            }
+            else
+            {
+                <h5>None at the moment</h5>
+            }
+            <br />
+        </div>
+        <div class="author-extras">
+            <a asp-action="EditUsersInRole" asp-controller="Admin" asp-route-roleId="@Model.Id" class="frm-button material-button medium">Add or Remove Users</a>
 
         </div>
 
-        <!--this is important for the left ad box or share box fixer -->
-        <div id="endOfTheArticle"></div>
-
-
     </div>
-</article>
-<!-- card end -->
+</div>
+
+<div class="col-2">&nbsp;</div>

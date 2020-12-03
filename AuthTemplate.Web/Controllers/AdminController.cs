@@ -177,7 +177,7 @@ namespace AuthTemplate.Web.Controllers
             if (role == null)
             {
                 ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
-                return View("NotFound");
+                return View("Error");
             }
 
             for (int i = 0; i < model.Count; i++)

@@ -7,17 +7,13 @@
 
 @if (Model.Any())
 {
-    <a asp-action="CreateRole" asp-controller="Admin" class="frm-button material-button medium" type="button">
+    <a asp-action="CreateRole" asp-controller="Admin" class="frm-button btn btn-primary" type="button">
         Add New Role
     </a>
 
     foreach (var role in Model)
     {
 
-        <!-- card start -->
-        <article class="article-wrapper pb-0 mb-0">
-            <div class="article-content">
-                <div class="article-inner">
 
                     <div>
                         <div class="columns column-2">&nbsp;</div>
@@ -37,17 +33,17 @@
                                     <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
 
 
-                                        <a asp-action="EditRole" asp-controller="Admin" asp-route-id="@role.Id" class="frm-button material-button medium">Edit</a>
+                                        <a asp-action="EditRole" asp-controller="Admin" asp-route-id="@role.Id" class="frm-button btn btn-outline-info">Edit</a>
 
                                         <span id="confirmDeleteSpan_@role.Id" style="display:none">
                                             <span>&nbsp; Are you sure you want to delete?&nbsp;</span>
-                                            <button type="submit" class="frm-button material-button medium">Yes</button>
-                                            <a href="#" class="frm-button material-button medium"
+                                            <button type="submit" class="frm-button btn btn-outline-info">Yes</button>
+                                            <a href="#" class="frm-button btn btn-outline-warning"
                                                onclick="confirmDelete('@role.Id', false)">No</a>
                                         </span>
 
                                         <span id="deleteSpan_@role.Id">
-                                            <a href="#" class="frm-button material-button medium"
+                                            <a href="#" class="frm-button btn btn-outline-danger"
                                                onclick="confirmDelete('@role.Id', true)">Delete</a>
                                         </span>
 
@@ -60,29 +56,19 @@
                     </div>
                     <div class="columns column-2">&nbsp;</div>
 
-                </div>
-
-                <!--this is important for the left ad box or share box fixer -->
-                <div id="endOfTheArticle"></div>
-
-
-            </div>
-        </article>
-        <!-- card end -->
+        
     }
 }
 else
 {
-    <!-- article body start -->
     <br />
     <br />
-    <article class="article-wrapper">
-        <div class="article-content">
+ 
             <div class="article-inner">
 
                 <div>
                     <div class="col-2">&nbsp;</div>
-                    <div class="col-2">
+                    <div class="col-10">
                         <div class="author-list">
 
                             <!-- start -->
@@ -94,7 +80,7 @@ else
                                     <hr />
                                     <div class="author-description">
                                         <div class="frm-row">
-                                            <a asp-action="CreateRole" asp-controller="Admin" class="frm-button material-button medium" type="button">Create Role</a>
+                                            <a asp-action="CreateRole" asp-controller="Admin" class="frm-button btn btn-primary" type="button">Create Role</a>
                                         </div>
                                     </div>
                                 </div>
@@ -111,14 +97,24 @@ else
 
                 </div>
 
-                <!--this is important for the left ad box or share box fixer -->
-                <div id="endOfTheArticle"></div>
 
 
             </div>
-        </div>
-    </article>
-    <!-- article body end -->
+
 
 
 }
+
+<script>function confirmDelete(uniqueId, isTrue) {
+
+        var deleteSpan = 'deleteSpan_' + uniqueId;
+        var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+        if (isTrue) {
+            $('#' + deleteSpan).hide();
+            $('#' + confirmDeleteSpan).show();
+        } else {
+            $('#' + deleteSpan).show();
+            $('#' + confirmDeleteSpan).hide();
+        }
+    }</script>

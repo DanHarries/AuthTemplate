@@ -60,6 +60,8 @@ namespace AuthTemplate.Web
             });
 
             // Register DI
+
+            // Add smtp setting in appsettings.json
             services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
