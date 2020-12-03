@@ -1,5 +1,7 @@
-﻿using AuthTemplate.Web.Models;
+﻿using AuthTemplate.Data;
+using AuthTemplate.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,14 +16,16 @@ namespace AuthTemplate.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly SignInManager<MyApplicationUser> _signInManager;
+        public HomeController(ILogger<HomeController> logger, SignInManager<MyApplicationUser> signInManager)
         {
             _logger = logger;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
         {
+
             return View();
         }
 

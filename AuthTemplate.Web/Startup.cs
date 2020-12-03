@@ -1,7 +1,11 @@
 using AuthTemplate.Data;
+using AuthTemplate.Web.Email;
+using AuthTemplate.Web.Email.Helpers;
+using AuthTemplate.Web.Email.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -54,6 +58,13 @@ namespace AuthTemplate.Web
                 config.Filters.Add(new AuthorizeFilter(policy));
 
             });
+
+            // Register DI
+            services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddTransient<ISendEmailHelper, SendEmailHelper>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,7 +85,9 @@ namespace AuthTemplate.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
